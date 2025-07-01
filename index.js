@@ -76,6 +76,31 @@ app.patch('/api/tasks/:id', async (req, res) => {
 });
 
 
+
+app.put('/api/tasks/:id', async (req, res) => {
+  try {
+    const { title, description, assignedTo, status, dueDate, priority } = req.body;
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      req.params.id,
+      { title, description, assignedTo, status, dueDate, priority },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedTask) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+
+    res.json(updatedTask);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to update task' });
+  }
+});
+
+
+
+
 app.delete('/api/tasks/:id', async (req, res) => {
   try {
     await Task.findByIdAndDelete(req.params.id);
