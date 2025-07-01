@@ -3,7 +3,13 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 require('dotenv').config(); 
 const app = express();
-app.use(cors());
+const cors = require('cors');
+
+app.use(cors({
+  origin: 'https://change-network-frontend-xi.vercel.app',
+  credentials: true
+}));
+
 app.use(express.json());
 
 const PORT = 5000;
