@@ -44,9 +44,7 @@ mongoose.connect(mongoURI)
   .catch(err => console.error('❌ DB connection error:', err));
 
 
-// ===== API Routes =====
 
-// Create Task
 app.post('/api/tasks', async (req, res) => {
   try {
     const task = await Task.create(req.body);
@@ -56,7 +54,7 @@ app.post('/api/tasks', async (req, res) => {
   }
 });
 
-// Get All Tasks (with optional filters)
+
 app.get('/api/tasks', async (req, res) => {
   const { status, assignedTo } = req.query;
   const filter = {};
@@ -118,5 +116,5 @@ app.delete('/api/tasks/:id', async (req, res) => {
 
 
 app.listen(PORT, () => {
-      console.log(`🚀 Server is running on http://localhost:${PORT}`);
+      console.log(` Server is running on http://localhost:${PORT}`);
     });
